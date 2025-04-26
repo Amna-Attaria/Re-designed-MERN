@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { Routes, Route, useLocation  } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Home from './Pages/Home';
 import Navigation from './components/Navigation';
 import Contact from './Pages/Contact';
@@ -8,19 +7,19 @@ import About from './Pages/About';
 import Footer from './components/Footer';
 import LoginPage from './Pages/LoginPage';
 import SignUp from './Pages/Signup';
-import Cart from "./Pages/Cart" 
-import Logout from "./Pages/Logout" 
-import Profile from "./Pages/Profile"
-import Admin from "./Pages/AdminPage"
+import Cart from "./Pages/Cart";
+import Logout from "./Pages/Logout";
+import Profile from "./Pages/Profile";
+import Admin from "./Pages/AdminPage";
 import Products from './Pages/Products';
 import Update from './Pages/Update';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
 const App = () => {
   const location = useLocation();
-  const adminPage = location.pathname === '/admin'; 
+  const isAdminPage = location.pathname.startsWith('/admin');
+
   return (
     <>
       <ToastContainer
@@ -34,8 +33,8 @@ const App = () => {
         draggable
         pauseOnHover
       />
-    
-      {!adminPage && <Navigation />} 
+
+      {!isAdminPage && <Navigation />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
@@ -45,11 +44,11 @@ const App = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/admin" element={<Admin />} />
-        <Route path='/products' element={<Products />} />
+        <Route path="/products" element={<Products />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/update" element={<Update />} />
-    </Routes>
-    {!adminPage && <Footer />}
+      </Routes>
+      {!isAdminPage && <Footer />}
     </>
   );
 };
